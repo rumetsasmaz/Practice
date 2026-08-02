@@ -9,7 +9,7 @@ def stock_status(stock):
         return "High stock"
 
 def process_stock(stocks):
-    
+    total_stock = 0
     for entry in stocks:
         total_stock += entry["Stock"]
         entry["Status"] = stock_status(entry["Stock"])
