@@ -10,7 +10,11 @@ Her görevi tamamla, yorumları (#) sil ve kodu yaz.
 # "Ben <isim>, <yas> yaşındayım."  (f-string kullan)
 # ---------------------------------------------------------------
 
-# buraya yaz
+isim = input("isminiz: ") 
+yas = int(input("yasiniz: "))
+
+print(f"Ben {isim}, {yas} Yasindayim")
+
 
 
 # ---------------------------------------------------------------
@@ -19,7 +23,12 @@ Her görevi tamamla, yorumları (#) sil ve kodu yaz.
 # Şifre "acilsusam" ise "Kapı açıldı 🔓" yazdır, değilse "Reddedildi 🔒".
 # ---------------------------------------------------------------
 
-# buraya yaz
+sifre = input("Sifreniz: ")
+
+if sifre == "acilsusam":
+    print("Kapi Acildi 🔓")
+else:
+    print("Reddedildi🔒")
 
 
 # ---------------------------------------------------------------
@@ -28,7 +37,10 @@ Her görevi tamamla, yorumları (#) sil ve kodu yaz.
 # İpucu: range(5, 0, -1)  -> 5,4,3,2,1
 # ---------------------------------------------------------------
 
-# buraya yaz
+print("Geri Sayim Basliyor")
+for x in range(5 , 0 , -1):
+    print(x)
+print("Basla")
 
 
 # ---------------------------------------------------------------
