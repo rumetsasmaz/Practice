@@ -50,4 +50,18 @@ print("Basla")
 # Doğru girerse "Giriş başarılı" yaz ve döngüden çık (break).
 # ---------------------------------------------------------------
 
-# buraya yaz
+password = "bumbabum"
+attempt = 3 
+
+while attempt > 0:
+    user_input = input("Your Password:")
+    if user_input == password:
+        print("Correct Password Signing in")
+        break
+    else:
+        attempt -= 1
+        print(f"Wrong Password You Have {attempt} Attempt Left")
+       
+
+if attempt == 0:
+    print("System Locked")
