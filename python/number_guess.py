@@ -8,5 +8,3 @@ while True:
         break
     else:
         print("Your Guess Is Wrong Try Again")
-      
-        
