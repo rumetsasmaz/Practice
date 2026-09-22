@@ -31,3 +31,7 @@ for port in range(start_port , end_port + 1):
 
 print("\n--- RESULTS ---")
 print(f"Open Ports: {open_ports}")
+
+with open("port_results.txt" , "w") as file:
+    file.write("--- PORT RESULTS ---\n")
+    file.write("Open Ports: 135\n")
