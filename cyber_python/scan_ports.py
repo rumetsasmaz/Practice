@@ -19,8 +19,6 @@ def scan_port_range(start_port , end_port):
         s.close()
 
 
-
-
 try:
     start = int(input("Enter A Start Port: "))
     end = int(input("Enter A End Port: "))
