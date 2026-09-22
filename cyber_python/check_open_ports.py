@@ -28,7 +28,6 @@ for port in range(start_port , end_port + 1):
         print(f"[-] Port {port} Is CLOSED") 
 
 
-
 print("\n--- RESULTS ---")
 print(f"Open Ports: {open_ports}")
 
