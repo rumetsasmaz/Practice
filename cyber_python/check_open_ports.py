@@ -34,4 +34,5 @@ print(f"Open Ports: {open_ports}")
 
 with open("port_results.txt" , "w") as file:
     file.write("--- PORT RESULTS ---\n")
-    file.write("Open Ports: 135\n")
+    file.write(f"Open Ports: {open_ports}\n")
+    
