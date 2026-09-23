@@ -32,5 +32,10 @@ class PortScanner:
 scanner = PortScanner("127.0.0.1")
 scanner.scan_range(130 , 140)
 
+
+
+
+
+
 print("\n--- SUMMARY ---")
 print(f"Found Open Ports: {scanner.open_ports}")
