@@ -28,14 +28,15 @@ class PortScanner:
             else:
                 print(f"[-] Port {port} Is CLOSED")
 
+    def save_results(self , filename="scan_results.txt"):
+        with open("scan_results.txt" , "w") as file:
+            file.write(f"Target IP: {self.target_ip}\n")
+            file.write(f"Open Ports: {self.open_ports}\n")      
+
 
 scanner = PortScanner("127.0.0.1")
 scanner.scan_range(130 , 140)
-
-
-
-
-
+scanner.save_results()
 
 print("\n--- SUMMARY ---")
 print(f"Found Open Ports: {scanner.open_ports}")
