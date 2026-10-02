@@ -74,7 +74,7 @@ if __name__ == "__main__":
     target = "127.0.0.1"
 
     print("=== 1. PORT SCANNER TEST ===")
-    p_scanner = PortScanner(target, [80, 135, 443, 445])
+    p_scanner = PortScanner(target, [22, 135, 443, 445])
     p_scanner.scan()
 
     print("\n=== 2. WEB RECON TEST ===")
