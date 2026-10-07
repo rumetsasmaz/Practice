@@ -70,6 +70,20 @@ class WebReconScanner(BaseScanner):
                 self.log(f"Banner could not be retrieved. (Error: {e})") 
 
 
+class DNSReconScanner(BaseScanner):
+
+    def check_dns_records(self):
+
+        self.log("Checking DNS Records...")
+
+        try:
+            socket.setdefaulttimeout(2)
+            result = socket.gethostbyaddr(self.target_ip)
+            self.log(f"DNS Records Found: {result[0]}")
+        except socket.herror:
+            self.log("No DNS Records Found")
+
+
 if __name__ == "__main__":
     target = "127.0.0.1"
 
@@ -80,6 +94,13 @@ if __name__ == "__main__":
     print("\n=== 2. WEB RECON TEST ===")
     w_scanner = WebReconScanner(target)
     w_scanner.check_http_banner(80)
+    
+    print("\n=== 3. DNS RECON TEST ===")
+    target_dns = "8.8.8.8"
+
+    dns_scanner = DNSReconScanner(target_dns)
+    dns_scanner.check_dns_records()
+
 
     print("\n=== LOG GEÇMİŞİ (Port Scanner) ===")
     print(p_scanner.logs)
