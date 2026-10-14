@@ -25,6 +25,28 @@ class PortScannerModule(BaseModule):
         except Exception as e:
             print(f"[-] An error occurred during the scan {e}")
 
+class SubDomainModule(BaseModule):
+    def __init__(self  , target , wordlist):
+        super().__init__(target)
+        self.wordlist = wordlist
 
-scanner = PortScannerModule("127.0.0.1" , [80 , 443])
-scanner.run()
+    def run(self):
+        print(f"[*] Starting SubDomain Scan: {self.target}")
+        try:
+            for sub in self.wordlist:
+                print(f"[+] Domain founded: {sub}.{self.target}")
+        except Exception as e:
+            print(f"[-] Error during subdomain scanning: {e}")
+
+
+if __name__ == "__main__":
+    target_host = "hedef.site.com"
+port_scanner = PortScannerModule(target_host , [80 , 443 , 8080])
+sub_scanner = SubDomainModule(target_host , ["admin", "api", "test", "login"])
+
+modules = [port_scanner , sub_scanner]
+
+print("=== NETPULSE FRAMEWORK ÇALIŞTIRILIYOR ===")
+for module in modules:
+    module.run()
+    print("-" * 40)
