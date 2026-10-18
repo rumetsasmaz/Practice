@@ -37,18 +37,27 @@ class SubDomainModule(BaseModule):
         super().__init__(target)
         self.wordlist = wordlist
 
+    def resolve(self , domain):
+        try:
+            return socket.gethostbyname(domain)
+        except socket.gaierror:
+            return None
+
     def run(self):
         print(f"[*] Starting SubDomain Scan: {self.target}")
-        try:
-            for sub in self.wordlist:
-                print(f"[+] Domain founded: {sub}.{self.target}")
-        except Exception as e:
-            print(f"[-] Error during subdomain scanning: {e}")
+
+        for sub in self.wordlist:
+            domain = f"{sub}.{self.target}"
+            ip = self.resolve(domain)
+            if ip is None:
+                print(f"[-] Not found: {domain}")
+            else:
+                print(f"[+] Found: {domain} -> {ip}")
 
 
 if __name__ == "__main__":
     port_scanner = PortScannerModule("127.0.0.1" , [22 , 135 , 443 , 445])
-    sub_scanner = SubDomainModule("hedef.site.com" , ["admin", "api", "test", "login"])
+    sub_scanner = SubDomainModule("google.com" , ["www", "mail", "zzz-yok"])
 
     modules = [port_scanner , sub_scanner]
 
