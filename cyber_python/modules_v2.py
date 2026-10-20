@@ -8,7 +8,7 @@ class BaseModule:
 
     def run(self):
 
-        raise NotImplementedError()\
+        raise NotImplementedError()
 
 class PortScannerModule(BaseModule):
 
@@ -43,8 +43,45 @@ class PortScannerModule(BaseModule):
             else:
                 print(f"[-] {port} CLOSED")
 
+class ReverseDNSModule(BaseModule):
+
+    def __init__(self, *ips , timeout=2):
+        self.ips = ips
+        super().__init__("multiple IP's", timeout)
+
+    def lookup(self, ip):
+
+        try:
+            result = socket.gethostbyaddr(ip)
+        except (socket.herror , socket.gaierror):
+            return None
+        else:
+            return result[0]
+
+    def run(self):
+
+        for ip in self.ips:
+            result = self.lookup(ip)
+            if result is None:
+                print(f"[-] {ip} -> No Record")
+            else:
+                print(f"[+] {ip} -> {result}")
 
 
 if __name__ == "__main__":
 
-    BaseModule("x").run()
+    my_ports = [22, 80, 135, 445]
+    modules = [
+
+            PortScannerModule("127.0.0.1", *my_ports, timeout=2),
+            ReverseDNSModule("8.8.8.8", "1.1.1.1"),
+            ]
+    for module in modules:
+        module.run()
+        print("-" * 40)
+
+    try:
+        PortScannerModule("127.0.0.1", 80 , 99999999)
+
+    except ValueError as e:
+        print(e)
