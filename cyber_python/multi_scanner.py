@@ -41,33 +41,34 @@ class PortScanner(BaseScanner):
                 self.log("Stopped By The User")
                 break
             except socket.error:
-                self.log("Port {port} Connection Error")
+                self.log(f"Port {port} Connection Error")
 
 class WebReconScanner(BaseScanner):
 
         def check_http_banner(self , port=80):
 
             self.log(f"Port {port} Querying HTTP banner on...")
-
+            s = socket.socket(socket.AF_INET , socket.SOCK_STREAM)
             try:
 
-                s = socket.socket(socket.AF_INET , socket.SOCK_STREAM)
                 s.settimeout(1.0)
                 result = s.connect_ex((self.target_ip , port))
+                if result != 0:
+                    self.log("Port Closed / Connection Lost")
+                    return
                 request = f"HEAD / HTTP/1.1\r\nHost: {self.target_ip}\r\n\r\n"
                 s.send(request.encode())
                 response = s.recv(1024).decode(errors="ignore")
-                s.close()
-
                 if "Server:" in response:
                     for line in response.split("\r\n"):
                         if line.startswith("Server"):
                             self.log(f"Server Information Retrieved -> {line}")
                 else:
                     self.log("HTTP response received, but the Server header was not found.")
-
             except Exception as e:
-                self.log(f"Banner could not be retrieved. (Error: {e})") 
+                self.log(f"Banner Could Not Be Retrieved. (Error: {e})")
+            finally:
+                s.close()
 
 
 class DNSReconScanner(BaseScanner):
