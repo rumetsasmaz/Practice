@@ -20,7 +20,7 @@ class PortScanner(BaseScanner):
         self.ports_to_scan = ports_to_scan
 
     def scan(self):
-        self.log("Startded Port Scan")
+        self.log("Started Port Scan")
 
         for port in self.ports_to_scan:
 
